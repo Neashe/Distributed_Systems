@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+option java_multiple_files = true;
+option java_package = "sr.grpc.gen";
+option java_outer_classname = "DynamicServiceProto";
+
+message Person {
+  string name = 1;
+  int32 age = 2;
+}
+
+service DynamicService {
+  rpc AddPerson(Person) returns (Person) {}
+  rpc GetPersonList(google.protobuf.Empty) returns (stream Person) {}
+  rpc UpdatePersonAge(PersonAgeUpdate) returns (Person) {}
+}
+
+message PersonAgeUpdate {
+  string name = 1;
+  int32 new_age = 2;
+}
